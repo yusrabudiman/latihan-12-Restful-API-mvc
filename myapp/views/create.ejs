@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST API - MVC</title>
+    <link rel="stylesheet" href="https://www.unpkg.com/bulma@0.9.3/css/bulma.css">
+</head>
+<body>
+    <div id="app" class="container is-max-desktop mt-5">
+        <h1 class="title">Add Product</h1>
+        <div class="field"><label class="label">Product Name</label>
+            <div class="control">
+                <input type="text" name="name" id="name" class="input" placeholder="Product Name">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Product Price</label>
+            <div class="control">
+                <input type="text" name="price" id="price" class="input" placeholder="Product Price">
+            </div>
+        </div>
+        <div class="control">
+            <button class="button is-success" id="save">SAVE</button>
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        document.getElementById('save').onclick = () => {
+            axios({
+                method: 'post',
+                url: '/api/products',
+                data: {
+                    name: document.getElementById('name').value,
+                    price: document.getElementById('price').value
+                }
+            }).then((result) => {
+                alert('Info Status: ' + result.status)
+                window.location = "/";
+            }).catch((err) => {
+                alert('error ' + err)
+            });
+        }
+    </script>
+</body>
+</html>
